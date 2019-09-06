@@ -1,6 +1,8 @@
 import Home from "./home.js";
-import { sound } from './../data/sound.js';
 import End from './end.js';
+import Board from './board.js';
+import { sound } from './../data/sound.js';
+
 
 const Game = (_ => {
   const letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
@@ -53,6 +55,7 @@ const Game = (_ => {
     } else {
       lives--;
       // render board accordingly
+      Board.setLives(lives);
     }
     render();
     // check if the game is over
