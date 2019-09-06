@@ -1,5 +1,6 @@
 import Home from "./home.js";
 import { sound } from './../data/sound.js';
+import End from './end.js';
 
 const Game = (_ => {
   const letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
@@ -66,12 +67,18 @@ const Game = (_ => {
     // if won, alert win
     if (hasWon()) {
       sound.win.play();
-      alert('You win!');
+      End.setState({
+        chosenWord, // ES6, equivalent to chosenWord: chosenWord
+        result: 'win'
+      })
     }
     // if lost, alert lost
     if (hasLost()) {
       sound.lose.play();
-      alert('You lose!');
+      End.setState({
+        chosenWord, // ES6, equivalent to chosenWord: chosenWord
+        result: 'lose'
+      })
     }
   }
 
