@@ -46,6 +46,48 @@ const Game = (_ => {
     if (isAlreadyTaken(guess)) return;
     guesses.push(guess);
     // check if the guess exists in the chosenWord
+    if (chosenWord.includes(guess)) {
+      // update guessing word
+      updateGuessingWord(guess);
+    } else {
+      lives--;
+      // render board accordingly
+    }
+    render();
+    // check if the game is over
+    isGameOver();
+  }
+
+  const hasWon = _ => guessingWord.join('') === chosenWord;
+
+  const hasLost = _ => lives <= 0;
+
+  const isGameOver = _ => {
+    // if won, alert win
+    if (hasWon()) {
+      sound.win.play();
+      alert('You win!');
+    }
+    // if lost, alert lost
+    if (hasLost()) {
+      sound.lose.play();
+      alert('You lose!');
+    }
+  }
+
+  const render = _ => {
+    document.querySelector('.hangman__lives').innerHTML = lives;
+    // .join converts guessingWord array to string
+    document.querySelector('.hangman__word').innerHTML = guessingWord.join('');
+    document.querySelector('.hangman__letters').innerHTML = createLetters();
+  }
+
+  const updateGuessingWord = letter => {
+    chosenWord.split('').forEach((elem, index) => { // .forEach only exists on the Array object
+      if (elem === letter) { // elem = current letter going through in chosenWord
+        guessingWord[index] = elem; // update guessing word, use index to letter
+      }
+    })
   }
 
   const showInitPage = _ => {
@@ -69,9 +111,12 @@ const Game = (_ => {
   // return as a string on line 31  ${createLetters()}
   const createLetters = _ => {
     let markup = ``;
-    letters.forEach(letter  => {
+    letters.forEach(letter => {
+      // check if letter already selected, if true make hangman__letter--active
+      // else make empty string:
+      const isActive = isAlreadyTaken(letter) ? 'hangman__letter--active' : '';
       markup += `
-        <li class="hangman__letter">${letter}</li>
+        <li class="hangman__letter ${isActive}">${letter}</li>
       `
     })
     return markup;
