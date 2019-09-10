@@ -23,6 +23,7 @@ const Game = (_ => {
     // show initial screen or page
     showInitPage();
     listeners();
+    Board.init(); // initalize board when game starts
   }
 
   const listeners = _ => {
@@ -55,7 +56,7 @@ const Game = (_ => {
     } else {
       lives--;
       // render board accordingly
-      Board.setLives(lives);
+      Board.setLives(lives); // board exists now, before this it doesn't
     }
     render();
     // check if the game is over

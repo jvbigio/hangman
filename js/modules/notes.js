@@ -8,13 +8,13 @@ context.stroke();
 
 context.moveTo(20, 20); // starting point
 context.lineTo(40, 80); // ending point
-context.stroke(); 
+context.stroke();
 
 // draw rectangle
 // rect(x, y, width, height);
 context.fillStyle = 'red';
 context.rect(0, 0, 100, 100);
-context.fill(); 
+context.fill();
 
 // circle
 // context.arc(centerX, centerY, radius, startAngle, endAngle, counterClockwise)
